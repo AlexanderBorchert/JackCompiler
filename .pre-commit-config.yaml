@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.15.0
+    hooks:
+      - id: mypy
+        args: [ "--config-file", "pyproject.toml" ]
+        additional_dependencies:
+          - "pytest>=8.3.5"
+          - "pytest-mypy-plugins>=3.2.0"
+
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.5    # or the appropriate tag from this repo
+    hooks:
+      - id: ruff
+        args: [
+          "--select=E,F,W,N,C",  # Specify rule categories explicitly
+          "--ignore=W291,W293",  # Ignore specific whitespace issues
+          "--fix",
+          "--line-length=120",
+          "--preview",
+        ]
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        pass_filenames: false
+        stages: [ pre-commit, pre-push ]

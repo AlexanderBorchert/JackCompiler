@@ -1,0 +1,60 @@
+[project]
+name = "JackCompiler"
+version = "0.1.0"
+description = "A Jack Compiler for the Nand2Tetris project."
+authors = [
+    { name = "Alexander Borchert", email = "alexander.he.borchert@googlemail.com" }
+]
+license = "MIT"
+
+requires-python = ">=3.12"
+dependencies = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "pytest-mypy-plugins>=3.2.0",
+    "ruff>=0.11.8",
+]
+
+[build-system]
+requires = ["setuptools>=75.8.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.9.5",
+    "pre-commit>=4.1.0",
+    "pytest-mypy-plugins>=2.0.0"
+
+]
+
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["jack_compiler*"]
+
+
+[tool.ruff]
+lint.select = ["E", "F", "W", "C", "N"]  # Enable more error categories, D not contained
+lint.fixable = ["ALL"] # Ensure Ruff fixes all fixable issues
+lint.ignore = ["W291", "W293"]
+preview = true
+line-length = 120
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+]
+# Ignore whitespace issues: W291 = trailing whitespace, W293 = blank line has spaces
+# at the moment: when I go to next line cursor will jump to left which is not wanted
+
+
+[tool.mypy]
+exclude = "^tests/"
+
+
+
+
+
+
+
