@@ -50,7 +50,7 @@ class Tokenizer:
                     continue
                 elif next_char == "*":
                     self.__file.read(1)
-                    while (not (self.__peek_current_char() == "*" and self.__peek_next_char() == "/")):
+                    while not (self.__peek_current_char() == "*" and self.__peek_next_char() == "/"):
                         self.__file.read(1)
                     self.__file.read(2)
                     continue
@@ -107,5 +107,5 @@ class Tokenizer:
         return self
     
     def __exit__(self, exc_type, exc_val, exc_tb):
-        if hasattr(self, '_Tokenizer__file'):  # Note: name mangling format
+        if hasattr(self, '_Tokenizer__file'):
             self.__file.close()
